@@ -22,6 +22,7 @@ import {
   StringASTNode,
   NullASTNode,
   PropertyASTNode,
+  BaseASTNode,
 } from '../jsonASTTypes';
 import { ErrorCode, JSONPath } from 'vscode-json-languageservice';
 import * as nls from 'vscode-nls';
@@ -63,11 +64,46 @@ export abstract class ASTNodeImpl {
   public offset: number;
   public length: number;
   public readonly parent: ASTNode;
+  public location: string;
 
   constructor(parent: ASTNode, offset: number, length?: number) {
     this.offset = offset;
     this.length = length;
     this.parent = parent;
+  }
+
+  public getNodeFromOffsetEndInclusive(offset: number): ASTNode {
+    const collector = [];
+    const findNode = (node: ASTNode | ASTNodeImpl): ASTNode | ASTNodeImpl => {
+      if (offset >= node.offset && offset <= node.offset + node.length) {
+        const children = node.children;
+        for (
+          let i = 0;
+          i < children.length && children[i].offset <= offset;
+          i++
+        ) {
+          const item = findNode(children[i]);
+          if (item) {
+            collector.push(item);
+          }
+        }
+        return node;
+      }
+      return null;
+    };
+    const foundNode = findNode(this);
+    let currMinDist = Number.MAX_VALUE;
+    let currMinNode = null;
+    for (const possibleNode in collector) {
+      const currNode = collector[possibleNode];
+      const minDist =
+        currNode.length + currNode.offset - offset + (offset - currNode.offset);
+      if (minDist < currMinDist) {
+        currMinNode = currNode;
+        currMinDist = minDist;
+      }
+    }
+    return currMinNode || foundNode;
   }
 
   public get children(): ASTNode[] {
@@ -402,6 +438,10 @@ export class JSONDocument {
       );
     }
     return void 0;
+  }
+
+  public getNodeFromOffsetEndInclusive(offset: number): ASTNode {
+    return this.root && this.root.getNodeFromOffsetEndInclusive(offset);
   }
 
   public visit(visitor: (node: ASTNode) => boolean): void {

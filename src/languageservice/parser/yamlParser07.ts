@@ -96,7 +96,7 @@ function recursivelyBuildAst(parent: ASTNode, node: Yaml.YAMLNode): ASTNode {
       const valueNode = instance.value
         ? recursivelyBuildAst(result, instance.value)
         : new NullASTNodeImpl(parent, instance.endPosition, 0);
-      //valueNode.location = key.value;
+      valueNode.location = key.value;
 
       result.keyNode = keyNode;
       result.valueNode = valueNode;

@@ -11,7 +11,7 @@ import {
   LanguageService,
 } from 'vscode-json-languageservice';
 import { Hover, TextDocument, Position } from 'vscode-languageserver-types';
-import { matchOffsetToDocument2 } from '../utils/arrUtils';
+import { matchOffsetToDocument } from '../utils/arrUtils';
 import { LanguageSettings } from '../yamlLanguageService';
 import { parse as parseYAML } from '../parser/yamlParser07';
 import { YAMLSchemaService } from './yamlSchemaService';
@@ -43,7 +43,7 @@ export class YAMLHover {
     }
     const doc = parseYAML(document.getText());
     const offset = document.offsetAt(position);
-    const currentDoc = matchOffsetToDocument2(offset, doc);
+    const currentDoc = matchOffsetToDocument(offset, doc);
     if (currentDoc === null) {
       return this.promise.resolve(void 0);
     }

@@ -26,6 +26,8 @@ export interface BaseASTNode {
   readonly length: number;
   readonly children?: ASTNode[];
   readonly value?: string | boolean | number | null;
+  location: string;
+  getNodeFromOffsetEndInclusive(offset: number): ASTNode;
 }
 export interface ObjectASTNode extends BaseASTNode {
   readonly type: 'object';

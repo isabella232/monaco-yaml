@@ -34,13 +34,12 @@ export class YAMLFormatter {
     }
 
     try {
-      const prettier = require('prettier/standalone');
-      const parser = require('prettier/parser-yaml');
+      const prettier = require('prettier');
       const text = document.getText();
 
       const formatted = prettier.format(
         text,
-        Object.assign(options, { parser: 'yaml', plugins: [parser] })
+        Object.assign(options, { parser: 'yaml' })
       );
 
       return [

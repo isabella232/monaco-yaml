@@ -19,7 +19,7 @@ import {
 import * as nls from 'vscode-nls';
 const localize = nls.loadMessageBundle();
 
-import * as Yaml from '../../yaml-ast-parser-custom-tags/index';
+import * as Yaml from 'yaml-ast-parser-custom-tags';
 import { Schema, Type } from 'js-yaml';
 
 import { getLineStartPositions } from '../utils/documentPositionCalculator';
@@ -243,7 +243,7 @@ function recursivelyBuildAst(parent: ASTNode, node: Yaml.YAMLNode): ASTNode {
   }
 }
 
-function convertError(e: Yaml.Error) {
+function convertError(e: Yaml.YAMLException) {
   const line = e.mark.line === 0 ? 0 : e.mark.line - 1;
   const character =
     e.mark.position + e.mark.column === 0
@@ -290,7 +290,7 @@ function createJSONDocument(
 
   //Patch ontop of yaml-ast-parser to disable duplicate key message on merge key
   const isDuplicateAndNotMergeKey = function(
-    error: Yaml.Error,
+    error: Yaml.YAMLException,
     yamlText: string
   ) {
     const errorConverted = convertError(error);

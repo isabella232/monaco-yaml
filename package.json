@@ -100,5 +100,8 @@
     "testMatch": [
       "**/test/*.test.+(ts|js)"
     ]
-  }
+  },
+  "files": [
+    "lib/*"
+  ]
 }

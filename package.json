@@ -1,6 +1,6 @@
 {
   "name": "@wings-software/monaco-yaml",
-  "version": "2.4.21",
+  "version": "2.4.26",
   "description": "A Harness fork of monaco-yaml",
   "scripts": {
     "watch": "tsc -p ./src --watch",
@@ -54,7 +54,7 @@
     "jsonc-parser": "^2.0.2",
     "lint-staged": "^8.1.0",
     "monaco-editor": "^0.16.2",
-    "monaco-editor-core": "0.15.5",
+    "monaco-editor-core": "0.16.1",
     "monaco-languages": "1.6.0",
     "monaco-plugin-helpers": "^1.0.2",
     "prettier": "^1.19.1",

@@ -33,23 +33,23 @@ export class YAMLFormatter {
       return [];
     }
 
-    try {
-      const prettier = require('prettier');
-      const text = document.getText();
+    // try {
+    //   const prettier = require('prettier');
+    //   const text = document.getText();
 
-      const formatted = prettier.format(
-        text,
-        Object.assign(options, { parser: 'yaml' })
-      );
+    //   const formatted = prettier.format(
+    //     text,
+    //     Object.assign(options, { parser: 'yaml' })
+    //   );
 
-      return [
-        TextEdit.replace(
-          Range.create(Position.create(0, 0), document.positionAt(text.length)),
-          formatted
-        ),
-      ];
-    } catch (error) {
-      return [];
-    }
+    //   return [
+    //     TextEdit.replace(
+    //       Range.create(Position.create(0, 0), document.positionAt(text.length)),
+    //       formatted
+    //     ),
+    //   ];
+    // } catch (error) {
+    //   return [];
+    // }
   }
 }

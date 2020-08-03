@@ -1,6 +1,6 @@
 {
   "name": "@wings-software/monaco-yaml",
-  "version": "2.4.31",
+  "version": "2.4.32",
   "description": "A Harness fork of monaco-yaml",
   "scripts": {
     "watch": "tsc -p ./src --watch",
@@ -38,8 +38,7 @@
     "js-yaml": "^3.12.0",
     "vscode-json-languageservice": "^3.4.11",
     "vscode-languageserver": "^5.2.1",
-    "vscode-uri": "^2.1.1",
-    "prettier": "^1.19.1"
+    "vscode-uri": "^2.1.1"
   },
   "peerDependencies": {
     "monaco-editor": "^0.19.2"

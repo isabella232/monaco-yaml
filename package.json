@@ -21,11 +21,6 @@
   "directories": {
     "lib": "./lib"
   },
-  "author": "Kevin Decker <kpdecker@gmail.com> (http://incaseofstairs.com)",
-  "maintainers": [
-    "kpdecker",
-    "pengx17"
-  ],
   "license": "MIT",
   "repository": "https://github.com/wings-software/monaco-yaml",
   "publishConfig": {

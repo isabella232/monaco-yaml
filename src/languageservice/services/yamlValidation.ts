@@ -19,7 +19,7 @@ export class YAMLValidation {
   private jsonValidation;
 
   private MATCHES_MULTIPLE =
-    'Matches multiple schemas when only one must validate.';
+    'Matches multiple schemas when only one must validate, correct?.';
 
   public constructor(
     schemaService: YAMLSchemaService,

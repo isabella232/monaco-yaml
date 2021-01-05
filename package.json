@@ -1,6 +1,6 @@
 {
   "name": "@wings-software/monaco-yaml",
-  "version": "2.4.32",
+  "version": "2.4.33",
   "description": "A Harness fork of monaco-yaml",
   "scripts": {
     "watch": "tsc -p ./src --watch",

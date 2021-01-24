@@ -671,9 +671,7 @@ function validate(
           severity: DiagnosticSeverity.Warning,
           message: localize(
             'oneOfWarning',
-            matches.length === 2
-              ? `Only one of ${matches[0]} or ${matches[1]} must be present.`
-              : 'Matches multiple schemas when only one must validate.'
+            getCustomOneOfErrorMessage(matches)
           ),
         });
       }
@@ -1503,5 +1501,19 @@ function validate(
       }
     }
     return bestMatch;
+  }
+
+  function getCustomOneOfErrorMessage(matches) {
+    if (
+      matches.length === 2 &&
+      Array.isArray(matches[0]?.required) &&
+      Array.isArray(matches[1]?.required)
+    ) {
+      return `Only one of ${matches[0]?.required.join(
+        ','
+      )} or ${matches[1].required.join(',')} must be present.`;
+    }
+
+    return 'Matches multiple schemas when only one must validate.';
   }
 }

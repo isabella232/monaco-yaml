@@ -38,9 +38,6 @@ See `examples` directory for esm and umd examples.
 - `yarn`
 - open `$/monaco-yaml/demo/index.html` in your favorite browser.
 
-A running example:
-![demo-image](test-demo.png)
-
 ## Credits
 
 - https://github.com/redhat-developer/yaml-language-server
@@ -53,7 +50,3 @@ Manually clone dependencies list below and update the project files accordingly:
   - `cp yaml-language-server/src/languageservice monaco-yaml/src/languageservice`
   - Modify the import paths, go to the test page and see if it still works
 - `src/yaml-ast-parser-custom-tags`: https://github.com/JPinkney/yaml-ast-parser/tree/master/src
-
-## License
-
-[MIT](https://github.com/pengx17/monaco-yaml/blob/master/LICENSE.md)

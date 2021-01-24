@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
-import 'monaco-yaml/esm/monaco.contribution';
+import '@wings-software/monaco-yaml/lib/esm/monaco.contribution';
 import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 
 // NOTE: This will give you all editor featues. If you would prefer to limit to only the editor
@@ -11,7 +11,7 @@ import 'monaco-editor';
 // NOTE: using loader syntax becuase Yaml worker imports editor.worker directly and that
 // import shouldn't go through loader syntax.
 import EditorWorker from 'worker-loader!monaco-editor/esm/vs/editor/editor.worker';
-import YamlWorker from 'worker-loader!monaco-yaml/esm/yaml.worker';
+import YamlWorker from 'worker-loader!@wings-software/monaco-yaml/lib/esm/yaml.worker';
 
 window.MonacoEnvironment = {
   getWorker(workerId, label) {
@@ -38,26 +38,185 @@ const Editor = () => {
             uri: 'http://myserver/foo-schema.json', // id of the first schema
             fileMatch: ['*'], // associate with our model
             schema: {
-              id: 'http://myserver/foo-schema.json', // id of the first schema
               type: 'object',
+              required: ['type'],
               properties: {
-                p1: {
-                  enum: ['v1', 'v2'],
-                },
-                p2: {
-                  $ref: 'http://myserver/bar-schema.json', // reference the second schema
+                type: {
+                  type: 'string',
+                  enum: [
+                    'ClassWithApiModelOverride',
+                    'ClassWithoutApiModelOverride',
+                  ],
                 },
               },
-            },
-          },
-          {
-            uri: 'http://myserver/bar-schema.json', // id of the first schema
-            schema: {
-              id: 'http://myserver/bar-schema.json', // id of the first schema
-              type: 'object',
-              properties: {
-                q1: {
-                  enum: ['x1', 'x2'],
+              $schema: 'http://json-schema.org/draft-07/schema#',
+              allOf: [
+                {
+                  if: {
+                    properties: {
+                      type: {
+                        const: 'ClassWithoutApiModelOverride',
+                      },
+                    },
+                  },
+                  then: {
+                    properties: {
+                      spec: {
+                        $ref: '#/definitions/ClassWithoutApiModelOverride',
+                      },
+                    },
+                  },
+                },
+                {
+                  if: {
+                    properties: {
+                      type: {
+                        const: 'ClassWithApiModelOverride',
+                      },
+                    },
+                  },
+                  then: {
+                    properties: {
+                      spec: {
+                        $ref: '#/definitions/testName',
+                      },
+                    },
+                  },
+                },
+              ],
+              definitions: {
+                ClassWhichContainsInterface: {
+                  type: 'object',
+                  required: ['type'],
+                  properties: {
+                    type: {
+                      type: 'string',
+                      enum: [
+                        'ClassWithApiModelOverride',
+                        'ClassWithoutApiModelOverride',
+                      ],
+                    },
+                  },
+                  $schema: 'http://json-schema.org/draft-07/schema#',
+                  allOf: [
+                    {
+                      if: {
+                        properties: {
+                          type: {
+                            const: 'ClassWithoutApiModelOverride',
+                          },
+                        },
+                      },
+                      then: {
+                        properties: {
+                          spec: {
+                            $ref: '#/definitions/ClassWithoutApiModelOverride',
+                          },
+                        },
+                      },
+                    },
+                    {
+                      if: {
+                        properties: {
+                          type: {
+                            const: 'ClassWithApiModelOverride',
+                          },
+                        },
+                      },
+                      then: {
+                        properties: {
+                          spec: {
+                            $ref: '#/definitions/testName',
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+                ClassWithoutApiModelOverride: {
+                  allOf: [
+                    {
+                      $ref: '#/definitions/TestInterface',
+                    },
+                    {
+                      type: 'object',
+                      properties: {
+                        testString: {
+                          type: 'string',
+                        },
+                        x: {
+                          type: 'string',
+                        },
+                        y: {
+                          type: 'string',
+                        },
+                      },
+                    },
+                    {
+                      oneOf: [
+                        {
+                          required: ['x'],
+                        },
+                        {
+                          required: ['y'],
+                        },
+                      ],
+                    },
+                  ],
+                  $schema: 'http://json-schema.org/draft-07/schema#',
+                },
+                TestInterface: {
+                  type: 'object',
+                  $schema: 'http://json-schema.org/draft-07/schema#',
+                },
+                testName: {
+                  allOf: [
+                    {
+                      $ref: '#/definitions/TestInterface',
+                    },
+                    {
+                      type: 'object',
+                      required: ['testString'],
+                      properties: {
+                        a: {
+                          type: 'string',
+                        },
+                        apimodelproperty: {
+                          type: 'string',
+                        },
+                        b: {
+                          type: 'string',
+                        },
+                        jsontypeinfo: {
+                          type: 'string',
+                        },
+                        testString: {
+                          type: 'string',
+                        },
+                      },
+                    },
+                    {
+                      oneOf: [
+                        {
+                          required: ['apimodelproperty'],
+                        },
+                        {
+                          required: ['jsontypeinfo'],
+                        },
+                      ],
+                    },
+                    {
+                      oneOf: [
+                        {
+                          required: ['a'],
+                        },
+                        {
+                          required: ['b'],
+                        },
+                      ],
+                    },
+                  ],
+                  $schema: 'http://json-schema.org/draft-07/schema#',
                 },
               },
             },

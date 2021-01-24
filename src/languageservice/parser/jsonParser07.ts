@@ -671,7 +671,9 @@ function validate(
           severity: DiagnosticSeverity.Warning,
           message: localize(
             'oneOfWarning',
-            'Matches multiple schemas when only one must validate, correct?. '
+            matches.length === 2
+              ? `Only one of ${matches[0]} or ${matches[1]} must be present.`
+              : 'Matches multiple schemas when only one must validate.'
           ),
         });
       }

@@ -1,5 +1,5 @@
 {
-  "name": "@wings-software/monaco-yaml",
+  "name": "@harness/monaco-yaml",
   "version": "2.4.36",
   "description": "A Harness fork of monaco-yaml",
   "scripts": {
@@ -22,7 +22,7 @@
     "lib": "./lib"
   },
   "license": "MIT",
-  "repository": "https://github.com/wings-software/monaco-yaml",
+  "repository": "https://github.com/harness/monaco-yaml",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },

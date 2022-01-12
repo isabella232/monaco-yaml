@@ -1,6 +1,6 @@
 {
   "name": "@harness/monaco-yaml",
-  "version": "2.4.36",
+  "version": "1.0.0",
   "description": "A Harness fork of monaco-yaml",
   "scripts": {
     "watch": "tsc -p ./src --watch",

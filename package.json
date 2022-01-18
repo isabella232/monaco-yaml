@@ -11,7 +11,7 @@
     "bundle:umd": "node ./scripts/bundle-umd",
     "bundle:esm": "node ./scripts/bundle-esm",
     "build": "yarn compile && yarn bundle",
-    "prepare": "yarn build",
+    "prepare": "husky install && yarn build",
     "lint": "prettier \"{src,test}/**/*.{json,scss,html,ts}\" --write",
     "test": "jest --verbose"
   },
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/jest": "^23.3.10",
     "@types/node": "^10.9.3",
-    "husky": "^1.2.1",
+    "husky": "^6.0.0",
     "jest": "^23.6.0",
     "jsonc-parser": "^2.0.2",
     "lint-staged": "^8.1.0",
@@ -64,15 +64,13 @@
   },
   "lint-staged": {
     "linters": {
+      "*": [
+        "sh scripts/license/stamp.sh"
+      ],
       "*.{json,scss,html,ts,js,jsx}": [
         "prettier --write",
         "git add"
       ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
     }
   },
   "jest": {

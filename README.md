@@ -1,3 +1,5 @@
+This repo contains code used in the [Harness CD Community Edition](https://github.com/harness/harness-cd-community) which is licensed under the PolyForm Shield License 1.0.0. This repo also contains code belonging to Harness CD Enterprise Plan and [monaco-yaml](https://monaco-yaml.js.org/) which are licensed under the [PolyForm Free Trial License 1.0.0](./licenses/PolyForm-Free-Trial-1.0.0.txt) and the [MIT](./licenses/MIT.txt) license respectively. You may obtain a copy of these licenses in the [licenses](./licenses/) directory at the root of this repository.
+
 # Monaco YAML
 
 YAML language plugin for the Monaco Editor. It provides the following features when editing YAML files:

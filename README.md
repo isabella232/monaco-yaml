@@ -44,7 +44,7 @@ See `examples` directory for esm and umd examples.
 
 - https://github.com/redhat-developer/yaml-language-server
 
-### Maintain
+## Maintain
 
 Manually clone dependencies list below and update the project files accordingly:
 
